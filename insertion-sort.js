@@ -1,18 +1,23 @@
-exports.insertionSort= function(arr){
-  var i, len = arr.length, el, j;
 
-  for(i = 1; i<len; i++){
-    el = arr[i];
-    j = i;
+//Function for Insertion Sort Algorithm
+exports.insertionSort= function(array){
+  var i; 
+  var len = array.length;
+  var el;
+  var j;
 
-    while(j>0 && arr[j-1]>arr[j]){
-      arr[j] = arr[j-1];
-      j--;
+  for(i = 0; i<len; i++){
+//the element to be Sorted
+    el = array[i];
+//Compare 2 adjacent elements at a time and sort them
+    for(j=i; j>0 && array[j-1]>el; j--){
+      array[j] = array[j-1];
+      
    }
 
-   arr[j] = el;
+   array[j] = el;
   }
 
-  return arr;
+  return array;
 }
         

@@ -1,23 +1,34 @@
-exports.mergeSort= function(arr){
-   var len = arr.length;
-   if(len <2)
-      return arr;
-   var mid = Math.floor(len/2),
-       left = arr.slice(0,mid),
-       right =arr.slice(mid);
-   var result = [],
-      lLen = left.length,
-      rLen = right.length,
-      l = 0,
-      r = 0;
-  	while(l < lLen && r < rLen){
-     if(left[l] < right[r]){
-       result.push(left[l++]);
-     }
-     else{
-       result.push(right[r++]);
+
+//Function for Merge Sort Algorithm
+var obj={
+mergeSort: function(array){
+//Dividing Array into 2
+    if (array.length > 1) {
+        return merge(obj.mergeSort(array.slice(0, Math.ceil(array.length/2))),
+            obj.mergeSort(array.slice(Math.ceil(array.length/2))), []);
+    } else {
+        return array;
     }
-  } 
-  return result.concat(left.slice(l)).concat(right.slice(r));
 }
-        
+}
+module.exports=obj; //Using this as it is a recursive function
+
+//Sorting the elements and Merging the divisons back together 
+function merge(left, right, array){
+    if (left.length == 0 && right.length == 0) {
+        return array;
+    } else if (left.length == 0) {
+        return array.concat(right);
+    } else if (right.length == 0) {
+        return array.concat(left);
+    } else if (left[0] < right[0]) {
+        array.push(left.shift());
+    } else if (left[0] > right[0]) {
+        array.push(right.shift());
+    } else {
+        array.push(left.shift());
+        right.shift();
+    }
+    return merge(left, right, array);
+}
+
